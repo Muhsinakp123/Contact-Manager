@@ -1,0 +1,78 @@
+{% extends 'master.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+
+{% block content %}
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Admin Panel</h2>
+    <ul>
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#">Manage Users</a></li>
+      <li><a href="#">Manage Contacts</a></li>
+      <li><a href="#">Reports</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Topbar -->
+    <header class="dashboard-topbar">
+      <h3>Welcome, {{ request.user.username }}</h3>
+      <button class="dashboard-btn">Profile</button>
+    </header>
+
+    <!-- Dashboard Stats -->
+    <section class="stats">
+      <div class="stat-card">
+        <h4>Total Users</h4>
+        <p>{{ total_users }}</p>
+      </div>
+      <div class="stat-card">
+        <h4>Total Contacts</h4>
+        <p>{{ total_contacts }}</p>
+      </div>
+      <div class="stat-card">
+        <h4>New This Week</h4>
+        <p>{{ new_users }}</p>
+      </div>
+    </section>
+
+    <!-- User Management Table -->
+    <section class="user-table-section">
+      <h3>Manage Users</h3>
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{% if user.is_superuser %}Admin{% else %}User{% endif %}</td>
+            <td>
+              <a href="#" class="action-btn action-edit">Edit</a>
+              <a href="#" class="action-btn action-delete">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="dashboard-footer">
+      <p>© 2025 Contact Manager Admin Panel</p>
+    </footer>
+  </main>
+</div>
+{% endblock %}
