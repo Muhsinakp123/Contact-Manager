@@ -180,3 +180,90 @@
   margin-top: auto;          /* Pushes footer to the bottom */
   padding: 15px 0;
 }
+
+
+
+
+/* contact and users lists */
+
+/* ===== Admin Table Section ===== */
+.table-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  flex-grow: 1;
+}
+
+/* ===== Table Style ===== */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* ===== Table Header ===== */
+.admin-table thead {
+  background-color: #1f78c9;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.admin-table th {
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Table Body ===== */
+.admin-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #1f2937;
+}
+
+/* ===== Hover Effect ===== */
+.admin-table tbody tr:hover {
+  background-color: #f9fafb;
+  transition: background 0.2s ease;
+}
+
+/* ===== Empty State ===== */
+.admin-table td[colspan] {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+  padding: 20px 0;
+}
+
+/* ===== Action Buttons ===== */
+.admin-table td button,
+.admin-table td a {
+  display: inline-block;
+  background-color: #1f78c9;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  margin-right: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.admin-table td button:hover,
+.admin-table td a:hover {
+  background-color: #135aa6;
+}
+
+/* ===== Delete Button ===== */
+.admin-table td .delete-btn {
+  background-color: #dc2626;
+}
+
+.admin-table td .delete-btn:hover {
+  background-color: #b91c1c;
+}

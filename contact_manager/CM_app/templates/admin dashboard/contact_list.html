@@ -29,7 +29,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Phone</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -38,7 +38,7 @@
             <td>{{ contact.id }}</td>
             <td>{{ contact.name }}</td>
             <td>{{ contact.email }}</td>
-            <td>{{ contact.phone }}</td>
+            <td>Update</td><td>Delete</td>
           </tr>
           {% empty %}
           <tr>
@@ -48,6 +48,9 @@
         </tbody>
       </table>
     </section>
+    <footer class="dashboard-footer">
+      <p>© 2025 Contact Manager Admin Panel</p>
+    </footer>
   </main>
 </div>
 

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+
 from .forms import LoginForm, UserForm
 from .models import Profile
 
@@ -58,6 +59,7 @@ def admin_users(request):
 @login_required
 def admin_contacts(request):
     return render(request, 'admin dashboard/contact_list.html')
+
 
 
 
