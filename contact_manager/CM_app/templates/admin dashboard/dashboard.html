@@ -2,72 +2,55 @@
 
 {% block title %}Admin Dashboard{% endblock %}
 
-
 {% block content %}
 <div class="dashboard-container">
   <!-- Sidebar -->
   <aside class="sidebar">
     <h2>Admin Panel</h2>
     <ul>
-      <li><a href="#">Dashboard</a></li>
-      <li><a href="#">Manage Users</a></li>
-      <li><a href="#">Manage Contacts</a></li>
-      <li><a href="#">Reports</a></li>
-      <li><a href="#">Settings</a></li>
-      <li><a href="{% url 'logout' %}">Logout</a></li>
+      <li><a href="{% url 'admin_dashboard' %}" class="{% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}"><i class="fa-solid fa-home"></i>Dashboard</a></li>
+      <li><a href="{% url 'admin_users' %}"><i class="fa-solid fa-users" class="{% if request.resolver_match.url_name == 'admin_users' %}active{% endif %}"></i>Manage Users</a></li>
+      <li><a href="{% url 'admin_contacts' %}"><i class="fa-solid fa-address-book" class="{% if request.resolver_match.url_name == 'admin_contacts' %}active{% endif %}"></i>Manage Contacts</a></li>
+      <li><a href="{% url 'logout' %}"  onclick="return confirmLogout()"><i class="fa-solid fa-sign-out-alt"></i>Logout</a></li>
     </ul>
   </aside>
 
   <!-- Main Content -->
   <main class="main-content">
     <!-- Topbar -->
+    <h2 class="dashboard-heading">Admin Dashboard</h2>
     <header class="dashboard-topbar">
       <h3>Welcome, {{ request.user.username }}</h3>
-      <button class="dashboard-btn">Profile</button>
+      <div class="profile-icon" onclick="toggleProfilePopup()">
+        <i class="fa-solid fa-user-circle"></i>
+      </div>
     </header>
 
-    <!-- Dashboard Stats -->
-    <section class="stats">
+    <!-- Profile Popup -->
+    <div class="profile-popup" id="profilePopup">
+      <h4>Admin Details</h4>
+      <p><strong>Username:</strong> {{ request.user.username }}</p>
+      <p><strong>Email:</strong> {{ request.user.email }}</p>
+      <button onclick="toggleProfilePopup()">Close</button>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="stats-full">
       <div class="stat-card">
+        <i class="fa-solid fa-users"></i>
         <h4>Total Users</h4>
         <p>{{ total_users }}</p>
       </div>
       <div class="stat-card">
+        <i class="fa-solid fa-address-book"></i>
         <h4>Total Contacts</h4>
         <p>{{ total_contacts }}</p>
       </div>
       <div class="stat-card">
+        <i class="fa-solid fa-user"></i>
         <h4>New This Week</h4>
         <p>{{ new_users }}</p>
       </div>
-    </section>
-
-    <!-- User Management Table -->
-    <section class="user-table-section">
-      <h3>Manage Users</h3>
-      <table class="user-table">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for user in users %}
-          <tr>
-            <td>{{ user.username }}</td>
-            <td>{{ user.email }}</td>
-            <td>{% if user.is_superuser %}Admin{% else %}User{% endif %}</td>
-            <td>
-              <a href="#" class="action-btn action-edit">Edit</a>
-              <a href="#" class="action-btn action-delete">Delete</a>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
     </section>
 
     <footer class="dashboard-footer">
@@ -75,4 +58,13 @@
     </footer>
   </main>
 </div>
+
+<script>
+  function toggleProfilePopup() {
+    document.getElementById("profilePopup").classList.toggle("show");
+  }
+     function confirmLogout() {
+        return confirm("Are you sure you want to log out?");
+    }
+</script>
 {% endblock %}

@@ -51,6 +51,15 @@ def User_dashboard(request):
 def admin_dashboard(request):
     return render(request, 'admin dashboard/dashboard.html')
 
+@login_required
+def admin_users(request):
+    return render(request, 'admin dashboard/users_list.html')
+
+@login_required
+def admin_contacts(request):
+    return render(request, 'admin dashboard/contact_list.html')
+
+
 
 # --- Logout ---
 def logout_view(request):

@@ -1,0 +1,59 @@
+{% extends 'master.html' %}
+
+{% block title %}Manage Contacts{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Admin Panel</h2>
+    <ul>
+      <li><a href="{% url 'admin_dashboard' %}"><i class="fa-solid fa-home"></i> Dashboard</a></li>
+      <li><a href="{% url 'admin_users' %}"><i class="fa-solid fa-users"></i> Manage Users</a></li>
+      <li><a href="{% url 'admin_contacts' %}" class="active"><i class="fa-solid fa-address-book"></i> Manage Contacts</a></li>
+      <li><a href="{% url 'logout' %}" onclick="return confirmLogout()"><i class="fa-solid fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <h2 class="dashboard-heading">Admin Dashboard</h2>
+    <header class="dashboard-topbar">
+      <h3>Manage Contacts</h3>
+    </header>
+
+    <section class="table-section">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for contact in contacts %}
+          <tr>
+            <td>{{ contact.id }}</td>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.email }}</td>
+            <td>{{ contact.phone }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4">No contacts found.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>
+
+<script>
+function confirmLogout() {
+    return confirm("Are you sure you want to log out?");
+}
+</script>
+{% endblock %}
