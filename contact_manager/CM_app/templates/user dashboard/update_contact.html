@@ -1,0 +1,27 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Update Contact
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <h1>Update Contact</h1>
+
+  <form method="post" action="{% url 'update_contact' form.instance.id %}">
+    {% csrf_token %}
+
+    <label for="{{ form.name.id_for_label }}">Name</label>
+    {{ form.name }}
+
+    <label for="{{ form.email.id_for_label }}">Email</label>
+    {{ form.email }}
+
+    <button type="submit">Update</button>
+  </form>
+
+  <div class="back-link">
+    <a href="{% url 'User_dashboard' %}">← Back to Contacts</a>
+  </div>
+</div>
+{% endblock %}

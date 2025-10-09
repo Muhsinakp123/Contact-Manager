@@ -65,6 +65,7 @@ button {
     cursor: pointer;
     margin-top: 15px;
     transition: 0.3s ease;
+    margin: 0 auto;
 }
 
 button:hover {

@@ -1,0 +1,21 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Add Contact
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <h1>Add Contact</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+
+  <div class="back-link">
+    <a href="/User_dashboard/">← Back to Contacts</a>
+  </div>
+</div>
+{% endblock %}
