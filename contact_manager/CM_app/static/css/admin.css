@@ -3,19 +3,15 @@
   font-size: 22px;
   font-weight: 600;
   color: #68c5ea;
-  margin: 0 0 25px 0;              /* remove top and side gaps */
+  margin: 0 0 25px 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   background: linear-gradient(90deg, #0f5c74, #135aa6);
-
-  /* 👇 make it stretch full width */
-  width: calc(100% + 50px);        /* extends beyond .main-content padding */
-  margin-left: -25px;              /* pull to touch sidebar */
-  padding: 13px 20px;              /* re-add inner spacing for text */
-  border-bottom: 2px solid #e5e7eb; /* subtle separator line */
+  width: calc(100% + 50px);
+  margin-left: -25px;
+  padding: 13px 20px;
+  border-bottom: 2px solid #e5e7eb;
 }
-
-
 
 /* ===== Layout ===== */
 .dashboard-container {
@@ -23,8 +19,8 @@
   min-height: 100vh;
   background-color: #f5f7fa;
   font-family: "Poppins", sans-serif;
-  width: 100vw;             /* full viewport width */
-  overflow: hidden;         /* remove scrollbars from flex container */
+  width: 100vw;
+  overflow: hidden;
 }
 
 /* ===== Sidebar ===== */
@@ -84,9 +80,9 @@
 .main-content {
   flex-grow: 1;
   padding: 25px;
-  min-height: 100vh;         /* Take full screen height */
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;    /* Stack content vertically */
+  flex-direction: column;
 }
 
 /* ===== Topbar ===== */
@@ -177,93 +173,195 @@
   text-align: center;
   color: #6b7280;
   font-size: 0.9rem;
-  margin-top: auto;          /* Pushes footer to the bottom */
+  margin-top: auto;
   padding: 15px 0;
 }
 
+/* ============================
+   Manage Users & Contacts Page
+===============================*/
 
-
-
-/* contact and users lists */
-
-/* ===== Admin Table Section ===== */
+/* Section Container */
 .table-section {
   background: #ffffff;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  padding: 25px 30px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
   flex-grow: 1;
+  transition: all 0.3s ease;
 }
 
-/* ===== Table Style ===== */
+.table-section:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Admin Table */
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top: 15px;
   font-size: 0.95rem;
   border-radius: 10px;
   overflow: hidden;
 }
 
-/* ===== Table Header ===== */
+/* Table Header */
 .admin-table thead {
-  background-color: #1f78c9;
+  background: linear-gradient(90deg, #1f78c9, #00b4d8);
   color: #fff;
   text-transform: uppercase;
 }
 
 .admin-table th {
-  padding: 14px 16px;
+  padding: 13px 16px;
   text-align: left;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
+  vertical-align: middle;
 }
 
-/* ===== Table Body ===== */
+/* Table Body */
 .admin-table td {
-  padding: 12px 16px;
+  padding: 13px 16px;
   border-bottom: 1px solid #e5e7eb;
   color: #1f2937;
+  vertical-align: middle;
 }
 
-/* ===== Hover Effect ===== */
+/* Hover Row */
+.admin-table tbody tr {
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
 .admin-table tbody tr:hover {
   background-color: #f9fafb;
-  transition: background 0.2s ease;
+  transform: scale(1.01);
 }
 
-/* ===== Empty State ===== */
+/* Empty State */
 .admin-table td[colspan] {
   text-align: center;
   color: #6b7280;
   font-style: italic;
-  padding: 20px 0;
+  padding: 25px 0;
 }
 
-/* ===== Action Buttons ===== */
-.admin-table td button,
-.admin-table td a {
+/* Buttons */
+.btn-update,
+.btn-delete {
   display: inline-block;
-  background-color: #1f78c9;
-  color: #fff;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 6px;
   font-size: 0.85rem;
+  font-weight: 500;
   text-decoration: none;
-  margin-right: 5px;
-  transition: background-color 0.2s ease;
+  transition: all 0.25s ease;
+  color: #fff;
 }
 
-.admin-table td button:hover,
-.admin-table td a:hover {
-  background-color: #135aa6;
+/* Update Button - Orange */
+.btn-update {
+  background-color: #f59e0b;
 }
 
-/* ===== Delete Button ===== */
-.admin-table td .delete-btn {
+.btn-update:hover {
+  background-color: #d97706;
+  transform: translateY(-2px);
+}
+
+/* Delete Button - Red */
+.btn-delete {
+  background-color: #ef4444;
+}
+
+.btn-delete:hover {
   background-color: #dc2626;
+  transform: translateY(-2px);
 }
 
-.admin-table td .delete-btn:hover {
-  background-color: #b91c1c;
+/* Action Cell */
+.admin-table td:last-child {
+  text-align: center;
+  white-space: nowrap;
+}
+
+
+/* === Final Table Alignment Fix === */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse; /* ensures cells share borders */
+  table-layout: fixed;       /* keeps columns equal and aligned */
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px 16px;
+  text-align: center;
+  vertical-align: middle;
+  word-wrap: break-word;
+}
+
+/* Remove any weird extra spacing */
+.admin-table thead tr {
+  height: auto;
+}
+
+.admin-table tbody tr td:first-child,
+.admin-table thead tr th:first-child {
+  padding-left: 18px; /* keeps first column perfectly aligned */
+}
+
+/* === Column Width Adjustment === */
+.admin-table th:first-child,
+.admin-table td:first-child {
+  width: 60px;               /* make ID column compact */
+  text-align: center;        /* keep IDs nicely centered */
+}
+
+.admin-table th:nth-child(2),
+.admin-table td:nth-child(2) {
+  width: 180px;              /* example: Name column slightly wider */
+}
+
+/* Adjust if you want tighter spacing overall */
+.admin-table {
+  table-layout: auto;        /* allow flexible column sizing again */
+}
+
+
+/* Responsive Table */
+@media (max-width: 768px) {
+  .admin-table thead {
+    display: none;
+  }
+
+  .admin-table,
+  .admin-table tbody,
+  .admin-table tr,
+  .admin-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .admin-table tr {
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    padding: 10px;
+  }
+
+  .admin-table td {
+    border-bottom: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .admin-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #374151;
+  }
 }

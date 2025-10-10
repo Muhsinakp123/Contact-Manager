@@ -15,5 +15,14 @@ urlpatterns = [
     path('add_contact/', views.add_contact, name='add_contact'),
     path('update_contact/<int:id>/', views.update_contact, name='update_contact'),
     path('delete_contact/<int:id>/', views.delete_contact, name='delete_contact'),
+    
+     # CRUD for admin
+    path('admin_delete_user/<int:id>/', views.delete_user, name='delete_user'),
+    path('admin_delete_contact/<int:id>/', views.delete_contact_admin, name='delete_contact_admin'),
+
+    # User CRUD
+    path('add_contact/', views.add_contact, name='add_contact'),
+    path('update_contact/<int:id>/', views.update_contact, name='update_contact'),
+    path('delete_contact/<int:id>/', views.delete_contact, name='delete_contact'),
 ]
     

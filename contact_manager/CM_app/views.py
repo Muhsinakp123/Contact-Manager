@@ -53,17 +53,44 @@ def User_dashboard(request):
     contacts = Contact.objects.filter(owner=request.user)  # only this user's contacts
     return render(request, 'user dashboard/u_dashboard.html', {'contacts': contacts})
 
+# --- Admin Views ---
 @login_required
 def admin_dashboard(request):
-    return render(request, 'admin dashboard/dashboard.html')
+    total_users = User.objects.count()
+    total_contacts = Contact.objects.count()
+    new_users = User.objects.order_by('-date_joined')[:5]  # Example: show 5 latest
+    return render(request, 'admin dashboard/dashboard.html', {
+        'total_users': total_users,
+        'total_contacts': total_contacts,
+        'new_users': new_users.count()
+    })
+
 
 @login_required
 def admin_users(request):
-    return render(request, 'admin dashboard/users_list.html')
+    users = User.objects.all()
+    return render(request, 'admin dashboard/users_list.html', {'users': users})
+
 
 @login_required
 def admin_contacts(request):
-    return render(request, 'admin dashboard/contact_list.html')
+    contacts = Contact.objects.all()
+    return render(request, 'admin dashboard/contact_list.html', {'contacts': contacts})
+
+
+@login_required
+def delete_user(request, id):
+    user = get_object_or_404(User, id=id)
+    user.delete()
+    return redirect('admin_users')
+
+@login_required
+def delete_contact_admin(request, id):
+    contact = get_object_or_404(Contact, id=id)
+    contact.delete()
+    return redirect('admin_contacts')
+
+
 
 @login_required
 def add_contact(request):
