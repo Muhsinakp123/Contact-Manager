@@ -25,5 +25,9 @@ urlpatterns = [
     path('update_contact/<int:id>/', views.update_contact, name='update_contact'),
     path('update_user/<int:id>/', views.update_user, name='update_user'),
     path('delete_contact/<int:id>/', views.delete_contact, name='delete_contact'),
+    
+    path('forgot_password/', views.forgot_password, name='forgot_password'),
+    path('reset_password/<int:user_id>/', views.reset_password, name='reset_password'),
+
 ]
     

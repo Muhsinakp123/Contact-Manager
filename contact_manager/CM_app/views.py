@@ -1,3 +1,5 @@
+from django.contrib import messages
+from .forms import ResetPasswordForm
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -45,6 +47,53 @@ def login_View(request):
     return render(request, 'login.html', {'form': form})
 
 
+
+# --- Forgot Password from login page ---
+def forgot_password(request):
+    if request.method == 'POST':
+        username = request.POST.get('username').strip()
+
+        if not username:
+            return render(request, 'login.html', {
+                'form': LoginForm(),
+                'error': 'Please enter your username first.'
+            })
+
+        try:
+            user = User.objects.get(username=username)
+            # Username found → redirect to reset password page
+            return redirect('reset_password', user_id=user.id)
+
+        except User.DoesNotExist:
+            # Username invalid → show error *without redirecting*
+            form = LoginForm(initial={'username': username})
+            return render(request, 'login.html', {
+                'form': form,
+                'error': 'User not found. Please enter a valid username.'
+            })
+
+
+# --- Reset Password ---
+
+def reset_password(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    success_message = None  # message flag
+
+    if request.method == 'POST':
+        form = ResetPasswordForm(request.POST)
+        if form.is_valid():
+            new_password = form.cleaned_data['new_password']
+            user.set_password(new_password)
+            user.save()
+            # Show success message in same page instead of redirect
+            success_message = "Password reset successfully! Redirecting to login..."
+    else:
+        form = ResetPasswordForm()
+
+    return render(request, 'reset_password.html', {
+        'form': form,
+        'success_message': success_message
+    })
 
 
 # --- Dashboards ---
