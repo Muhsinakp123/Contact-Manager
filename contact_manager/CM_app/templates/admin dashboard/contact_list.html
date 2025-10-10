@@ -41,7 +41,7 @@
     <td>{{ contact.email }}</td>
     <td>{{ contact.owner.username }}</td>
     <td>
-      <a href="#" class="btn-update">Update</a> |
+      <a href="{% url 'update_contact' contact.id %}" class="btn-update">Update</a> |
       <a href="{% url 'delete_contact_admin' contact.id %}" onclick="return confirm('Delete this contact?')" class="btn-delete">Delete</a>
     </td>
   </tr>

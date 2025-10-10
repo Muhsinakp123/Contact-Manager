@@ -23,6 +23,7 @@ urlpatterns = [
     # User CRUD
     path('add_contact/', views.add_contact, name='add_contact'),
     path('update_contact/<int:id>/', views.update_contact, name='update_contact'),
+    path('update_user/<int:id>/', views.update_user, name='update_user'),
     path('delete_contact/<int:id>/', views.delete_contact, name='delete_contact'),
 ]
     

@@ -58,7 +58,7 @@ def User_dashboard(request):
 def admin_dashboard(request):
     total_users = User.objects.count()
     total_contacts = Contact.objects.count()
-    new_users = User.objects.order_by('-date_joined')[:5]  # Example: show 5 latest
+    new_users = User.objects.order_by('-date_joined')[:]  # Example: show 5 latest
     return render(request, 'admin dashboard/dashboard.html', {
         'total_users': total_users,
         'total_contacts': total_contacts,
@@ -68,7 +68,7 @@ def admin_dashboard(request):
 
 @login_required
 def admin_users(request):
-    users = User.objects.all()
+    users = User.objects.filter(is_superuser=False)
     return render(request, 'admin dashboard/users_list.html', {'users': users})
 
 
@@ -114,16 +114,61 @@ def delete_contact(request, id):
 
 @login_required
 def update_contact(request, id):
-    contact = get_object_or_404(Contact, id=id, owner=request.user)
+    # Admin can update any contact; normal user only their own
+    if request.user.is_superuser:
+        contact = get_object_or_404(Contact, id=id)
+    else:
+        contact = get_object_or_404(Contact, id=id, owner=request.user)
+
     if request.method == 'POST':
         form = ContactForm(request.POST, instance=contact)
         if form.is_valid():
             form.save()
-            return redirect('User_dashboard')
+            # Redirect based on who is logged in
+            if request.user.is_superuser:
+                return redirect('admin_contacts')
+            else:
+                return redirect('User_dashboard')
     else:
         form = ContactForm(instance=contact)
-    return render(request, 'user dashboard/update_contact.html', {'form': form})
+    if request.user.is_superuser:
+        return render(request, 'user dashboard/update_contact.html', {'form': form})
+    else:
+        return render(request, 'user dashboard/update_contact.html', {'form': form})
 
+
+
+@login_required
+def update_user(request, id):
+    # Admin can update any user; normal user only themselves
+    if request.user.is_superuser:
+        user_obj = get_object_or_404(User, id=id)
+    else:
+        if request.user.id != id:
+            # Prevent users from updating others
+            return redirect('User_dashboard')
+        user_obj = request.user
+
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user_obj)
+        if form.is_valid():
+            user = form.save(commit=False)
+            # Only hash password if changed
+            if form.cleaned_data.get('password'):
+                user.set_password(form.cleaned_data['password'])
+            user.save()
+            # Redirect based on role
+            if request.user.is_superuser:
+                return redirect('admin_users')
+            else:
+                return redirect('User_dashboard')
+    else:
+        # Do not prefill password fields
+        form = UserForm(instance=user_obj)
+        form.fields['password'].widget.attrs['value'] = ''
+        form.fields['confirm_password'].widget.attrs['value'] = ''
+
+    return render(request, 'admin dashboard/update_user.html', {'form': form})
 
 
 

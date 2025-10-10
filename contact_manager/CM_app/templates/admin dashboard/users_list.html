@@ -40,7 +40,7 @@
     <td>{{ user.username }}</td>
     <td>{{ user.email }}</td>
     <td>
-      <a href="#" class="btn-update">Update</a> |
+      <a href="{% url 'update_user' user.id %}" class="btn-update">Update</a> |
       <a href="{% url 'delete_user' user.id %}" onclick="return confirm('Delete this user?')" class="btn-delete">Delete</a>
     </td>
   </tr>

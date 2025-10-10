@@ -1,280 +1,294 @@
+/* ===== General Styling ===== */
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f4f6f8;
-    margin: 0;
-    padding: 0;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-    width: 100%;
-    min-height: 100vh;
-    margin: 40px auto;
-    background: #fff;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+  width: 100%;
+  min-height: 100vh;
+  margin: 40px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
 /* ===== Header Section ===== */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 30px;
-    background: linear-gradient(135deg, #09519e, #1a73e8);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    color: #fff;
-    margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  background: linear-gradient(135deg, #09519e, #1a73e8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: #fff;
+  margin-bottom: 5px;
 }
 
 .header h1 {
-    font-size: 26px;
-    font-weight: 600;
-    margin: 0;
-    letter-spacing: 0.5px;
-    color: white;
+  font-size: 26px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.5px;
+  color: white;
 }
 
-/* ===== Logout Button (inside user-card) ===== */
+/* ===== Logout Button Container ===== */
 .logout-container {
-    text-align: right;
-    margin-top: 15px;
+  text-align: right;
+  margin-top: 15px;
 }
-
 
 /* ===== Table Styling ===== */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
 }
 
 th, td {
-    text-align: center;
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
+  text-align: center;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
 }
 
 th {
-    background-color: #007bff;
-    color: white;
-    font-weight: 600;
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
 }
 
 tr:nth-child(even) {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 tr:hover {
-    background-color: #eef5ff;
+  background-color: #eef5ff;
 }
 
+/* ===== Buttons ===== */
 .btn {
-    display: inline-block;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: all 0.3s ease;
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .btn-update {
-    background-color: #ffc107;
-    color: #000;
-    text-decoration: none;
+  background-color: #ffc107;
+  color: #000;
 }
 
 .btn-update:hover {
-    background-color: #e0a800;
+  background-color: #e0a800;
 }
 
 .btn-delete {
-    background-color: #dc3545;
-    color: #fff;
-    text-decoration: none;
+  background-color: #dc3545;
+  color: #fff;
 }
 
 .btn-delete:hover {
-    background-color: #b52a37;
+  background-color: #b52a37;
 }
 
 .btn-add {
-    background-color: #28a745;
-    color: #fff;
-    padding: 10px 18px;
-    margin-top: 10px;
-    display: inline-block;
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 18px;
+  margin-top: 10px;
+  display: inline-block;
 }
 
 .btn-add:hover {
-    background-color: #218838;
+  background-color: #218838;
 }
 
-/* ===== User Card Layout ===== */
-.user-card {
-    background-color: #abecf4;
-    padding: 10px 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-/* Align profile icon and logout button side by side on the right */
-.user-actions {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-
-/* Flex layout for user info + logout button */
+/* ===== User Header + Actions ===== */
 .user-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px 25px;
+  position: relative;
+  background-color: #c8dff8;
 }
 
-/* Welcome text and profile icon side by side */
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .user-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .user-info h2 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 600;
-    color: #09519e;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #09519e;
 }
 
 .user-card-profile {
-    font-size: 35px;
-    color: #1a73e8;
-    cursor: pointer;
-    transition: transform 0.2s ease, color 0.2s ease;
+  font-size: 35px;
+  color: #1a73e8;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .user-card-profile:hover {
-    transform: scale(1.1);
-    color: #0f5c74;
+  transform: scale(1.1);
+  color: #0f5c74;
 }
 
 /* ===== Logout Button ===== */
 .logout-btn {
-    background-color: #ff4d4f;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  background-color: #ff4d4f;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .logout-btn:hover {
-    background-color: #d9363e;
-    transform: translateY(-2px);
+  background-color: #d9363e;
+  transform: translateY(-2px);
 }
 
-
-/* ===== Profile Popup inside Card ===== */
+/* ===== User Profile Popup ===== */
 .user-card-popup {
-    display: none;
-    position: absolute;
-    top: 70px;
-    right: 25px;
-    width: 240px;
-    background-color: #fff;
-    padding: 18px 20px;
-    border-radius: 10px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-    z-index: 100;
+  display: none;
+  position: absolute;
+  top: 70px;
+  right: 25px;
+  width: 260px;
+  background-color: #fff;
+  padding: 18px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .user-card-popup.show {
-    display: block;
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.user-card-popup h4 {
-    margin-top: 0;
-    margin-bottom: 12px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #09519e;
+/* Popup Header: Title + Close Icon */
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
+.popup-header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #09519e;
+}
+
+.close-icon {
+  font-size: 1.2rem;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.close-icon:hover {
+  color: red;
+  transform: scale(1.2);
+}
+
+/* Popup Content */
 .user-card-popup p {
-    margin: 6px 0;
-    font-size: 14px;
-    color: #333;
+  margin: 6px 0;
+  font-size: 14px;
+  color: #333;
 }
 
-.user-card-popup button.close-profile-btn {
-    width: 100%;
-    padding: 8px 0;
-    margin-top: 12px;
-    background-color: #09519e;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background 0.3s ease, transform 0.2s ease;
+/* Action icons inside popup */
+.user-popup-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 1.3rem;
 }
 
-.user-card-popup button.close-profile-btn:hover {
-    background-color: #1a73e8;
-    transform: translateY(-1px);
+.user-popup-actions a {
+  text-decoration: none;
+  transition: transform 0.2s ease;
 }
 
+.user-popup-actions a:hover {
+  transform: scale(1.1);
+}
 
-/* add contact */
-
+/* ===== Add Contact Form ===== */
 .form-container {
-    width: 90%;
-    max-width: 500px;
-    margin: 60px auto;
-    background: #fff;
-    padding: 30px 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
+  width: 90%;
+  max-width: 500px;
+  margin: 60px auto;
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-  h1 {
-    text-align: center;
-    color: #007bff;
-    margin-bottom: 25px;
-  }
+h1 {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 25px;
+}
 
-  form {
-    display: flex;
-    flex-direction: column;
-  }
+form {
+  display: flex;
+  flex-direction: column;
+}
 
-  label {
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 6px;
-  }
+label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
 
+button:hover {
+  background-color: #0056b3;
+}
 
-  button:hover {
-    background-color: #0056b3;
-  }
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+}
 
-  .back-link {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-  }
+.back-link a {
+  color: #28a745;
+  text-decoration: none;
+  font-weight: 600;
+}
 
-  .back-link a {
-    color: #28a745;
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  .back-link a:hover {
-    text-decoration: underline;
-    color: #1e7e34;
-  }
+.back-link a:hover {
+  text-decoration: underline;
+  color: #1e7e34;
+}
