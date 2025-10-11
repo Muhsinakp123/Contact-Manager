@@ -30,7 +30,8 @@ class LoginForm(forms.Form):
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
-        fields = ['name', 'email']
+        fields = ['name', 'email', 'phone']  # ✅ Added phone
+
 
 
 # ✅ NEW FORM FOR RESET PASSWORD
