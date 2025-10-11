@@ -28,6 +28,12 @@ def signup(request):
 
 # --- Login ---
 def login_View(request):
+
+    # Fetch the first superuser (for demo display)
+    admin_user = User.objects.filter(is_superuser=True).first()
+    admin_username = admin_user.username if admin_user else "Not found"
+    admin_password = "Muhsina@123"
+
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -41,10 +47,21 @@ def login_View(request):
                 else:
                     return redirect('User_dashboard')
             else:
-                return render(request, 'login.html', {'form': form, 'error': 'Invalid credentials'})
+                return render(request, 'login.html', {
+                    'form': form,
+                    'error': 'Invalid credentials',
+                    'admin_username': admin_username,
+                    'admin_password': admin_password
+                })
     else:
         form = LoginForm()
-    return render(request, 'login.html', {'form': form})
+
+    return render(request, 'login.html', {
+        'form': form,
+        'admin_username': admin_username,
+        'admin_password': admin_password
+    })
+
 
 
 

@@ -2,32 +2,38 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="login-container">
-    <h2>Login</h2>
+<div class="page-wrapper">
+    <!-- 🟦 Login Box (on top) -->
+    <div class="login-container">
+        <h2>Login</h2>
 
-    <!-- Error message -->
-    {% if error %}
-        <p id="errorMsg" style="color:red;">{{ error }}</p>
-    {% endif %}
+        <!-- Error message -->
+        {% if error %}
+            <p id="errorMsg" style="color:red;">{{ error }}</p>
+        {% endif %}
 
-    <form method="post" id="loginForm">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Log In</button>
-    </form>
+        <form method="post" id="loginForm">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Log In</button>
+        </form>
 
-    <!-- Hidden forgot password form (used for redirect check) -->
-    <form method="post" action="{% url 'forgot_password' %}" id="forgotForm" style="display:none;">
-        {% csrf_token %}
-        <input type="hidden" name="username" id="forgot_username">
-    </form>
+        <!-- Hidden forgot password form -->
+        <form method="post" action="{% url 'forgot_password' %}" id="forgotForm" style="display:none;">
+            {% csrf_token %}
+            <input type="hidden" name="username" id="forgot_username">
+        </form>
 
-    <!-- Forgot password link -->
-    <p>
-        <a href="#" id="forgotLink" class="forgot-link">Forgot Password?</a>
-    </p>
+        <p><a href="#" id="forgotLink" class="forgot-link">Forgot Password?</a></p>
+        <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+    </div>
 
-    <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+    <!-- 🟩 Admin Credentials Box (below the login box) -->
+    <div class="admin-box">
+        <h3>Admin Login Details</h3>
+        <p><strong>Username:</strong> {{ admin_username }}</p>
+        <p><strong>Password:</strong> {{ admin_password }}</p>
+    </div>
 </div>
 
 <script>
@@ -51,7 +57,7 @@
         forgotForm.submit();
     });
 
-    // 🧹 Auto-clear the error message when user starts typing again
+    // Auto-clear error message
     loginUsername.addEventListener('input', () => {
         if (errorMsg) {
             errorMsg.style.display = 'none';

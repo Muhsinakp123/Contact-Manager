@@ -43,7 +43,7 @@
             <td>{{ contact.phone|default:"—" }}</td> <!-- ✅ Added -->
             <td>{{ contact.owner.username }}</td>
             <td>
-              <a href="{% url 'update_contact' contact.id %}" class="btn-update">Update</a> |
+              <a href="{% url 'update_contact' contact.id %}" class="btn-update">Update</a>
               <a href="{% url 'delete_contact_admin' contact.id %}" onclick="return confirm('Delete this contact?')" class="btn-delete">Delete</a>
             </td>
           </tr>
