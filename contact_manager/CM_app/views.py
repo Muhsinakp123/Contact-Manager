@@ -1,3 +1,5 @@
+from datetime import timedelta,datetime
+from django.utils import timezone
 from django.contrib import messages
 from .forms import ResetPasswordForm
 from django.shortcuts import get_object_or_404, render, redirect
@@ -120,16 +122,34 @@ def User_dashboard(request):
     return render(request, 'user dashboard/u_dashboard.html', {'contacts': contacts})
 
 # --- Admin Views ---
+
 @login_required
 def admin_dashboard(request):
-    total_users = User.objects.count()
+    # Count only non-superuser users
+    total_users = User.objects.filter(is_superuser=False).count()
+
+    # Total contacts
     total_contacts = Contact.objects.count()
-    new_users = User.objects.order_by('-date_joined')[:]  # Example: show 5 latest
+
+    # ----- Calculate current week's Monday -----
+    today = timezone.now().date()  # current date
+    monday = today - timedelta(days=today.weekday())  # 0 = Monday, 6 = Sunday
+
+    # Combine Monday's date with midnight time and make it timezone-aware
+    monday_start = timezone.make_aware(datetime.combine(monday, datetime.min.time()))
+
+    # Count users created this week (Monday → now)
+    new_users_count = User.objects.filter(
+        date_joined__gte=monday_start,
+        is_superuser=False
+    ).count()
+
     return render(request, 'admin dashboard/dashboard.html', {
         'total_users': total_users,
         'total_contacts': total_contacts,
-        'new_users': new_users.count()
+        'new_users_count': new_users_count,
     })
+
 
 
 @login_required
@@ -147,8 +167,21 @@ def admin_contacts(request):
 @login_required
 def delete_user(request, id):
     user = get_object_or_404(User, id=id)
-    user.delete()
-    return redirect('admin_users')
+
+    # If the logged-in user is deleting their own account
+    if request.user == user:
+        logout(request)  # log out first
+        user.delete()    # then delete account
+        return redirect('login')
+
+    # If an admin deletes another user's account
+    elif request.user.is_superuser:
+        user.delete()
+        return redirect('admin_users')
+
+    else:
+        # Unauthorized access protection
+        return redirect('User_dashboard')
 
 @login_required
 def delete_contact_admin(request, id):
@@ -211,30 +244,36 @@ def update_user(request, id):
         user_obj = get_object_or_404(User, id=id)
     else:
         if request.user.id != id:
-            # Prevent users from updating others
             return redirect('User_dashboard')
         user_obj = request.user
 
     if request.method == 'POST':
+        # Limit form fields to username and email only
         form = UserForm(request.POST, instance=user_obj)
+        # Remove password fields from validation
+        form.fields.pop('password', None)
+        form.fields.pop('confirm_password', None)
+
         if form.is_valid():
-            user = form.save(commit=False)
-            # Only hash password if changed
-            if form.cleaned_data.get('password'):
-                user.set_password(form.cleaned_data['password'])
-            user.save()
-            # Redirect based on role
+            form.save()
+            messages.success(request, "User details updated successfully!")
             if request.user.is_superuser:
                 return redirect('admin_users')
             else:
                 return redirect('User_dashboard')
+        else:
+            messages.error(request, "Please correct the errors below.")
     else:
-        # Do not prefill password fields
         form = UserForm(instance=user_obj)
-        form.fields['password'].widget.attrs['value'] = ''
-        form.fields['confirm_password'].widget.attrs['value'] = ''
+        # Remove password fields from the rendered form
+        form.fields.pop('password', None)
+        form.fields.pop('confirm_password', None)
 
-    return render(request, 'admin dashboard/update_user.html', {'form': form})
+    return render(
+        request,
+        'admin dashboard/update_user.html',
+        {'form': form, 'user_obj': user_obj}
+    )
 
 
 

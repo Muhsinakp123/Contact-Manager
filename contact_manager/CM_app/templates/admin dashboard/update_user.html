@@ -1,20 +1,21 @@
 {% extends "master.html" %}
 
-{% block title %}
-  Update User
-{% endblock %}
+{% block title %}Update User{% endblock %}
 
 {% block content %}
 <div class="form-container">
   <h1>Update User</h1>
 
-  <form method="post" action="{% url 'update_user' form.instance.id %}">
+  <form method="post" action="{% url 'update_user' user_obj.id %}">
     {% csrf_token %}
+    {{ form.non_field_errors }}
 
     <label for="{{ form.username.id_for_label }}">Username</label>
+    {{ form.username.errors }}
     {{ form.username }}
 
     <label for="{{ form.email.id_for_label }}">Email</label>
+    {{ form.email.errors }}
     {{ form.email }}
 
     <button type="submit">Update</button>
