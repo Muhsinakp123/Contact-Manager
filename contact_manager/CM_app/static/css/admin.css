@@ -3,7 +3,7 @@
   font-size: 22px;
   font-weight: 600;
   color: #68c5ea;
-  margin: 0 0 25px 0;
+  margin: 20px 0 25px 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   background: linear-gradient(90deg, #0f5c74, #135aa6);
@@ -33,6 +33,7 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
+  margin-top: 20px;
 }
 
 .sidebar h2 {
@@ -198,70 +199,64 @@
 /* Admin Table */
 .admin-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 10px; 
   margin-top: 15px;
   font-size: 0.95rem;
-  border-radius: 10px;
-  overflow: hidden;
 }
 
 /* Table Header */
 .admin-table thead {
-  background: linear-gradient(90deg, #1f78c9, #00b4d8);
+  background: linear-gradient(90deg, #0066cc, #00b4d8);
   color: #fff;
-  text-transform: uppercase;
 }
 
 .admin-table th {
-  padding: 13px 16px;
-  text-align: left;
+  padding: 14px 18px;
+  text-align: center;
   font-weight: 600;
   letter-spacing: 0.4px;
-  vertical-align: middle;
+  text-transform: uppercase;
 }
 
-/* Table Body */
-.admin-table td {
-  padding: 13px 16px;
-  border-bottom: 1px solid #e5e7eb;
-  color: #1f2937;
-  vertical-align: middle;
-}
-
-/* Hover Row */
+/* Table Rows */
 .admin-table tbody tr {
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  border-radius: 10px;
 }
 
 .admin-table tbody tr:hover {
-  background-color: #f9fafb;
-  transform: scale(1.01);
+  background-color: #f1f9ff;
+  transform: translateY(-2px);
 }
 
-/* Empty State */
-.admin-table td[colspan] {
+/* Table Cells */
+.admin-table td {
+  padding: 12px 18px;
+  color: #1f2937;
   text-align: center;
-  color: #6b7280;
-  font-style: italic;
-  padding: 25px 0;
+  vertical-align: middle;
 }
 
-/* Buttons */
-.btn-update,
-.btn-delete {
-  display: inline-block;
+/* Center and space action buttons nicely */
+.admin-table td.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-update {
+  background-color: #f59e0b;
+  color: white;
   padding: 6px 14px;
   border-radius: 6px;
   font-size: 0.85rem;
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.25s ease;
-  color: #fff;
-}
-
-/* Update Button - Orange */
-.btn-update {
-  background-color: #f59e0b;
+  transition: 0.2s;
 }
 
 .btn-update:hover {
@@ -269,9 +264,15 @@
   transform: translateY(-2px);
 }
 
-/* Delete Button - Red */
 .btn-delete {
   background-color: #ef4444;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.2s;
 }
 
 .btn-delete:hover {
@@ -279,89 +280,20 @@
   transform: translateY(-2px);
 }
 
-/* Action Cell */
-.admin-table td:last-child {
-  text-align: center;
-  white-space: nowrap;
-}
 
 
-/* === Final Table Alignment Fix === */
-.admin-table {
-  width: 100%;
-  border-collapse: collapse; /* ensures cells share borders */
-  table-layout: fixed;       /* keeps columns equal and aligned */
-}
-
-.admin-table th,
-.admin-table td {
-  padding: 12px 16px;
-  text-align: center;
-  vertical-align: middle;
-  word-wrap: break-word;
-}
-
-/* Remove any weird extra spacing */
-.admin-table thead tr {
-  height: auto;
-}
-
-.admin-table tbody tr td:first-child,
-.admin-table thead tr th:first-child {
-  padding-left: 18px; /* keeps first column perfectly aligned */
-}
-
-/* === Column Width Adjustment === */
-.admin-table th:first-child,
-.admin-table td:first-child {
-  width: 60px;               /* make ID column compact */
-  text-align: center;        /* keep IDs nicely centered */
+/* === Column Widths for Balance === */
+.admin-table th:nth-child(1),
+.admin-table td:nth-child(1) {
+  width: 25%;
 }
 
 .admin-table th:nth-child(2),
 .admin-table td:nth-child(2) {
-  width: 180px;              /* example: Name column slightly wider */
+  width: 35%;
 }
 
-/* Adjust if you want tighter spacing overall */
-.admin-table {
-  table-layout: auto;        /* allow flexible column sizing again */
-}
-
-
-/* Responsive Table */
-@media (max-width: 768px) {
-  .admin-table thead {
-    display: none;
-  }
-
-  .admin-table,
-  .admin-table tbody,
-  .admin-table tr,
-  .admin-table td {
-    display: block;
-    width: 100%;
-  }
-
-  .admin-table tr {
-    margin-bottom: 15px;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    padding: 10px;
-  }
-
-  .admin-table td {
-    border-bottom: none;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    font-size: 0.9rem;
-  }
-
-  .admin-table td::before {
-    content: attr(data-label);
-    font-weight: 600;
-    color: #374151;
-  }
+.admin-table th:nth-child(3),
+.admin-table td:nth-child(3) {
+  width: 40%;
 }
